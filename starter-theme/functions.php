@@ -69,7 +69,7 @@ function cwt_enqueue_scripts_styles() {
 		true
 	);	
 	
-	wp_enqueue_script( 'scrollreveal', '//unpkg.com/scrollreveal/dist/scrollreveal.min.js', true ); 
+	// wp_enqueue_script( 'scrollreveal', '//unpkg.com/scrollreveal/dist/scrollreveal.min.js', true ); 
 
 }
 
@@ -174,7 +174,7 @@ function cwt_hide_scrollreveal() {
 	 </style>
 	<?php
 }
-add_action( 'wp_head', 'cwt_hide_scrollreveal' );
+// add_action( 'wp_head', 'cwt_hide_scrollreveal' );
 
 /* 
  * Google Analytics
