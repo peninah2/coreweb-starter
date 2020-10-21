@@ -382,8 +382,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="submit"],
 input[type="submit"].gform_button,
-.wp-block-button .wp-block-button__link,
-.wp-block-button.is-style-default .wp-block-button__link {
+.wp-block-button .wp-block-button__link {
 	background-color: #03a9f4;
 	border: 2px solid #03a9f4;
 	border-radius: 0;	
@@ -401,8 +400,7 @@ input[type="submit"].gform_button,
 	transition: .25s all ease-in-out;
 }
 
-.wp-block-button .wp-block-button__link,
-.wp-block-button.is-style-default .wp-block-button__link  {
+.wp-block-button .wp-block-button__link  {
 	display: block;
 }
 
@@ -424,7 +422,6 @@ input[type="submit"].gform_button:hover,
 .wp-block-button .wp-block-button__link:hover,
 input[type="submit"].gform_button:focus,
 .wp-block-button .wp-block-button__link:focus,
-.wp-block-button.is-style-default .wp-block-button__link:hover,
 .wp-block-button.is-style-default .wp-block-button__link:focus {
 	filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="1.25" /><feFuncG type="linear" slope="1.25" /><feFuncB type="linear" slope="1.25" /></feComponentTransfer></filter></svg>#filter');
 	-webkit-filter: brightness(1.25);
