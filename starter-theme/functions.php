@@ -198,6 +198,7 @@ add_action( 'genesis_before', 'cwt_google_tag_manager_body', 0 );
 
 // Use to redirect non-logged in users to homepage, for when site is under development
 // Can adjust to allow different pages/sections
+add_action( 'template_redirect', 'cwt_in_development_redirect' );
 function cwt_in_development_redirect() {
     $homepage_id = get_option('page_on_front');
     if ( ( ! is_page( $homepage_id ) ) && ! is_user_logged_in() ) {                                                                                  
