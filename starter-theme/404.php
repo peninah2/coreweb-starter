@@ -6,8 +6,8 @@
 //* Remove default loop
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 
-add_action( 'genesis_loop', 'cwt_genesis_404' );
-function cwt_genesis_404() {
+add_action( 'genesis_loop', 'hct_genesis_404' );
+function hct_genesis_404() {
 
 		echo  '<article class="entry"><div class="post hentry">';
 

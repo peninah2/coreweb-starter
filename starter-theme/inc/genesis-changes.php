@@ -2,7 +2,7 @@
 /**
  * Genesis Changes
  *
- * @package      CWStarter
+ * @package      HCStarter
 
 **/
 
@@ -10,8 +10,6 @@
 add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 add_theme_support( 'genesis-responsive-viewport' );
 add_theme_support( 'genesis-structural-wraps', array( 'header', 'menu-secondary', 'site-inner', 'footer-widgets', 'footer' ) );
-add_theme_support( 'genesis-menus', array( 'primary' => 'Primary Navigation Menu', 'secondary' => 'Secondary Navigation Menu' ) );
-add_theme_support( 'genesis-footer-widgets', 3 );
 
 // Adds support for accessibility.
 add_theme_support(
@@ -64,27 +62,36 @@ remove_filter( 'wp_nav_menu_items', 'genesis_nav_right', 10, 2 );
 
 
 // Remove Genesis SEO settings & Scripts from post/page editor
-add_action( 'admin_menu' , 'cwt_remove_genesis_page_scripts_box' );
-function cwt_remove_genesis_page_scripts_box() {
+add_action( 'admin_menu' , 'hct_remove_genesis_page_scripts_box' );
+function hct_remove_genesis_page_scripts_box() {
 	remove_meta_box( 'genesis_inpost_seo_box', 'page', 'normal' ); 
 	remove_meta_box( 'genesis_inpost_scripts_box', 'page', 'normal' );
 }
 
-// Removes output of unused admin settings metaboxes
-add_action( 'genesis_theme_settings_metaboxes', 'cwt_remove_metaboxes' );
-function cwt_remove_metaboxes( $_genesis_admin_settings ) {
+// Removes output of unused admin settings metaboxes -- uncomment to include
+// add_action( 'genesis_theme_settings_metaboxes', 'hct_remove_metaboxes' );
+function hct_remove_metaboxes( $_genesis_admin_settings ) {
 
 	remove_meta_box( 'genesis-theme-settings-header', $_genesis_admin_settings, 'main' );
 	remove_meta_box( 'genesis-theme-settings-nav', $_genesis_admin_settings, 'main' );
 
 } 
 
+// Customize the entry meta in the entry header (requires HTML5 theme support)
+add_filter( 'genesis_post_info', 'sp_post_info_filter' );
+function sp_post_info_filter($post_info) {
+	$post_info = '[post_date] by [post_author_posts_link] [post_comments] [post_edit]';
+	return $post_info;
+}
+
+
 /**
  * Disable customizer theme settings
- *
+ * Check the commented line to determine which to keep
  */
 function ea_disable_customizer_theme_settings( $config ) {
-	$remove = [ 'genesis_header', 'genesis_single', 'genesis_archives', 'genesis_footer' ];
+//	$remove = [ 'genesis_header', 'genesis_single', 'genesis_archives', 'genesis_footer' ];
+	$remove = [ 'genesis_footer' ];
 	foreach( $remove as $item ) {
 		unset( $config['genesis']['sections'][ $item ] );
 	}

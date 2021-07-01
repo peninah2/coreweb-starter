@@ -3,9 +3,19 @@
 /**
  * Footer
  *
- * @package      CWStarter
+ * @package      HCStarter
+
+
+ Footer options: 
+ 
+ - If design has fat footer and the sections are even, use widgets
+ - If sections are not even, use function below and adjust as needed
+
 
 **/
+
+
+// add_theme_support( 'genesis-footer-widgets', 3 );
 
 
 // Remove Genesis footer
@@ -14,18 +24,37 @@ remove_action('genesis_footer', 'genesis_do_footer');
 // Removes footer entry meta
 remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 
-// Add logo to footer 
-function cwt_logo_footer() {
+
+// Custom footer
+//add_action( 'genesis_footer', 'hct_custom_footer', 9 ); 
+
+function hct_custom_footer() {
 	?>
-		<div class="logo-footer">
-			<img src="/wp-content/themes/theme-name/images/logo_footer.png" alt="Client name logo" />
+	<div class="flexbox stack-1280">
+		
+		<div class="logo-footer flex-1 flex-item">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo/logo.svg" alt="COMPANY NAME logo" />
 		</div>
+		
+		<div class="flex-1 flex-item">
+			<?php wp_nav_menu( array( 'theme_location' => 'footer_menu_1', 'menu_class' => 'footer-menu genesis-nav-menu', ) ); ?>
+		</div>
+		
+		<div class="flex-1 flex-item">
+			<?php wp_nav_menu( array( 'theme_location' => 'footer_menu_2', 'menu_class' => 'footer-menu footer-menu-2 genesis-nav-menu', ) ); ?>
+		</div>
+		
+		<div class="flex-2 flex-item">
+			<?php gravity_form( 1, false, false, false, '', true ); ?>
+		</div>
+		
+	</div>
 	<?php
 }
-//add_action( 'genesis_footer', 'cwt_logo_footer', 9 ); 
 
 // Social menu 
-function cwt_social_menu() {
+// Requires adding social media links to options page via ACF
+function hct_social_menu() {
 	
 	$linkedin 	= get_field( 'linkedin', 'option' ); 
 	$instagram 	= get_field( 'instagram', 'option' );
@@ -52,4 +81,5 @@ function cwt_social_menu() {
 	
 	echo '</ul>';
 }
-//add_action( 'genesis_footer', 'cwt_social_menu', 11 );
+//add_action( 'genesis_footer', 'hct_social_menu', 11 );
+

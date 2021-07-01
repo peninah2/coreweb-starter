@@ -2,7 +2,7 @@
 /**
  * ACF
  *
- * @package      CWStarter
+ * @package      HCStarter
 
 **/
 
@@ -12,14 +12,17 @@
 if( function_exists('acf_add_options_page') ) {
 	
 	acf_add_options_page(array(
-		'page_title' 	=> 'THEME NAME Global Content',
-		'menu_title'	=> 'THEME Settings',
+		'page_title' 	=> 'Theme Settings',
+		'menu_title'	=> 'Theme Settings',
 		'menu_slug' 	=> 'theme-settings',
 		'capability'	=> 'edit_posts',
+		'icon_url'	 	=> 'dashicons-admin-site-alt3',
+		'position' 		=> 20,
 		'redirect'		=> false
 	));
 	
 }
+
 
 /* Contact anti-spambot
  * To use in template: 
@@ -27,24 +30,24 @@ if( function_exists('acf_add_options_page') ) {
  * $phone = antispambot( get_field( 'encoded_phone' ) );
 ------------------------------------------*/
 
-//add_shortcode( 'encoded_email', 'cwt_encoded_email_shortcode' );
-function cwt_encoded_email_shortcode() {
+add_shortcode( 'phone', 'hct_encoded_phone_shortcode' );
+function hct_encoded_phone_shortcode() {
 	
-	$email = antispambot( get_field( 'encoded_email', 'option' ) );
-	$emailLink = '<a href="mailto:' . $email . '">' . $email . '</a>';
-	
-	return $emailLink;
-
-}
-
-//add_shortcode( 'encoded_phone', 'cwt_encoded_phone_shortcode' );
-function cwt_encoded_phone_shortcode() {
-	
-	$phone = antispambot( get_field( 'encoded_phone', 'option' ) );
+	$phone	= antispambot( get_field( 'phone', 'option' ) );
 	$phoneLink = '<a href="tel:' . $phone . '">' . $phone . '</a>';
 	
 	return $phoneLink;
 
 }
+
+add_shortcode( 'address', 'hct_address_shortcode' );
+function hct_address_shortcode() {
+	
+	$address = get_field( 'address', 'option' );	
+	return $address;
+
+}
+
+
 
 

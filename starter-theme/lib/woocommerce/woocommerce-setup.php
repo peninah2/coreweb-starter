@@ -1,11 +1,11 @@
 <?php
 
 // Enqueues the theme's custom WooCommerce styles to the WooCommerce plugin
-add_filter( 'woocommerce_enqueue_styles', 'cwt_woocommerce_styles' );
-function cwt_woocommerce_styles( $enqueue_styles ) {
+add_filter( 'woocommerce_enqueue_styles', 'hct_woocommerce_styles' );
+function hct_woocommerce_styles( $enqueue_styles ) {
 
-	$enqueue_styles['theme-name-woocommerce-styles'] = array(
-		'src'     => get_stylesheet_directory_uri() . '/lib/woocommerce/theme-name-woocommerce.css',
+	$enqueue_styles['theme-woocommerce-styles'] = array(
+		'src'     => get_stylesheet_directory_uri() . '/lib/woocommerce/theme-woocommerce.css',
 		'deps'    => '',
 		'version' => CHILD_THEME_VERSION,
 		'media'   => 'screen',
@@ -25,34 +25,7 @@ if ( class_exists( 'WooCommerce' ) ) {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'cwt_products_match_height', 99 );
-/**
- * Prints an inline script to the footer to keep products the same height.
- *
- * @since 2.3.0
- */
-function cwt_products_match_height() {
-
-	// If Woocommerce is not activated, or a product page isn't showing, exit early.
-	if ( ! class_exists( 'WooCommerce' ) || ! is_shop() && ! is_product_category() && ! is_product_tag() ) {
-		return;
-	}
-
-	wp_enqueue_script(
-		'genesis-sample-match-height',
-		get_stylesheet_directory_uri() . '/js/jquery.matchHeight.min.js',
-		array( 'jquery' ),
-		CHILD_THEME_VERSION,
-		true
-	);
-	wp_add_inline_script(
-		'genesis-sample-match-height',
-		"jQuery(document).ready( function() { jQuery( '.product .woocommerce-LoopProduct-link').matchHeight(); });"
-	);
-
-}
-
-add_filter( 'woocommerce_style_smallscreen_breakpoint', 'cwt_woocommerce_breakpoint' );
+add_filter( 'woocommerce_style_smallscreen_breakpoint', 'hct_woocommerce_breakpoint' );
 /**
  * Modifies the WooCommerce breakpoints.
  *
@@ -60,7 +33,7 @@ add_filter( 'woocommerce_style_smallscreen_breakpoint', 'cwt_woocommerce_breakpo
  *
  * @return string Pixel width of the theme's breakpoint.
  */
-function cwt_woocommerce_breakpoint() {
+function hct_woocommerce_breakpoint() {
 
 	$current = genesis_site_layout();
 	$layouts = array(
@@ -78,7 +51,7 @@ function cwt_woocommerce_breakpoint() {
 
 }
 
-add_filter( 'genesiswooc_products_per_page', 'cwt_default_products_per_page' );
+add_filter( 'genesiswooc_products_per_page', 'hct_default_products_per_page' );
 /**
  * Sets the default products per page.
  *
@@ -86,13 +59,13 @@ add_filter( 'genesiswooc_products_per_page', 'cwt_default_products_per_page' );
  *
  * @return int Number of products to show per page.
  */
-function cwt_default_products_per_page() {
+function hct_default_products_per_page() {
 
 	return 8;
 
 }
 
-add_filter( 'woocommerce_pagination_args', 'cwt_woocommerce_pagination' );
+add_filter( 'woocommerce_pagination_args', 'hct_woocommerce_pagination' );
 /**
  * Updates the next and previous arrows to the default Genesis style.
  *
@@ -101,7 +74,7 @@ add_filter( 'woocommerce_pagination_args', 'cwt_woocommerce_pagination' );
  *
  * @return array New next and previous text arguments.
  */
-function cwt_woocommerce_pagination( $args ) {
+function hct_woocommerce_pagination( $args ) {
 
 	$args['prev_text'] = sprintf( '&laquo; %s', __( 'Previous Page', 'genesis-sample' ) );
 	$args['next_text'] = sprintf( '%s &raquo;', __( 'Next Page', 'genesis-sample' ) );
@@ -110,13 +83,13 @@ function cwt_woocommerce_pagination( $args ) {
 
 }
 
-add_action( 'after_switch_theme', 'cwt_woocommerce_image_dimensions_after_theme_setup', 1 );
+add_action( 'after_switch_theme', 'hct_woocommerce_image_dimensions_after_theme_setup', 1 );
 /**
  * Defines WooCommerce image sizes on theme activation.
  *
  * @since 2.3.0
  */
-function cwt_woocommerce_image_dimensions_after_theme_setup() {
+function hct_woocommerce_image_dimensions_after_theme_setup() {
 
 	global $pagenow;
 
@@ -125,11 +98,11 @@ function cwt_woocommerce_image_dimensions_after_theme_setup() {
 		return;
 	}
 
-	cwt_update_woocommerce_image_dimensions();
+	hct_update_woocommerce_image_dimensions();
 
 }
 
-add_action( 'activated_plugin', 'cwt_woocommerce_image_dimensions_after_woo_activation', 10, 2 );
+add_action( 'activated_plugin', 'hct_woocommerce_image_dimensions_after_woo_activation', 10, 2 );
 /**
  * Defines the WooCommerce image sizes on WooCommerce activation.
  *
@@ -137,14 +110,14 @@ add_action( 'activated_plugin', 'cwt_woocommerce_image_dimensions_after_woo_acti
  *
  * @param string $plugin The path of the plugin being activated.
  */
-function cwt_woocommerce_image_dimensions_after_woo_activation( $plugin ) {
+function hct_woocommerce_image_dimensions_after_woo_activation( $plugin ) {
 
 	// Checks to see if WooCommerce is being activated.
 	if ( 'woocommerce/woocommerce.php' !== $plugin ) {
 		return;
 	}
 
-	cwt_update_woocommerce_image_dimensions();
+	hct_update_woocommerce_image_dimensions();
 
 }
 
@@ -153,7 +126,7 @@ function cwt_woocommerce_image_dimensions_after_woo_activation( $plugin ) {
  *
  * @since 2.3.0
  */
-function cwt_update_woocommerce_image_dimensions() {
+function hct_update_woocommerce_image_dimensions() {
 
 	// Updates image size options.
 	update_option( 'woocommerce_single_image_width', 655 );    // Single product image.
@@ -164,7 +137,7 @@ function cwt_update_woocommerce_image_dimensions() {
 
 }
 
-add_filter( 'woocommerce_get_image_size_gallery_thumbnail', 'cwt_gallery_image_thumbnail' );
+add_filter( 'woocommerce_get_image_size_gallery_thumbnail', 'hct_gallery_image_thumbnail' );
 /**
  * Filters the WooCommerce gallery image dimensions.
  *
@@ -173,7 +146,7 @@ add_filter( 'woocommerce_get_image_size_gallery_thumbnail', 'cwt_gallery_image_t
  * @param array $size The gallery image size and crop arguments.
  * @return array The modified gallery image size and crop arguments.
  */
-function cwt_gallery_image_thumbnail( $size ) {
+function hct_gallery_image_thumbnail( $size ) {
 
 	$size = array(
 		'width'  => 180,
@@ -187,7 +160,7 @@ function cwt_gallery_image_thumbnail( $size ) {
 
 
 // Change default placeholder image for products
-function cwt_default_placeholder() {
+function hct_default_placeholder() {
 
   	add_filter('woocommerce_placeholder_img_src', 'custom_woocommerce_placeholder_img_src');
    
@@ -199,4 +172,4 @@ function cwt_default_placeholder() {
 	return $src;
 	}
 }
-add_action( 'init', 'cwt_default_placeholder' );
+add_action( 'init', 'hct_default_placeholder' );

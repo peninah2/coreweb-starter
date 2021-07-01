@@ -2,7 +2,7 @@
 /**
  * Layouts
  *
- * @package      CWStarter
+ * @package      HCStarter
 
 **/
 

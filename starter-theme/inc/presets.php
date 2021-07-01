@@ -2,7 +2,7 @@
 /**
  * Presets (colors, fonts)
  *
- * @package      CWStarter
+ * @package      HCStarter
 **/
 
 
@@ -10,55 +10,74 @@
 add_theme_support( 'disable-custom-font-sizes' );
 
 // -- Editor Font Styles
+// -- Editor Font Styles
 add_theme_support( 'editor-font-sizes', array(
-array(
-	'name'      => __( 'Small', 'theme-name' ),
-	'shortName' => __( 'S', 'theme-name' ),
-	'size'      => 14,
-	'slug'      => 'small'
-),
-array(
-	'name'      => __( 'Normal', 'theme-name' ),
-	'shortName' => __( 'M', 'theme-name' ),
-	'size'      => 20,
-	'slug'      => 'normal'
-),
-array(
-	'name'      => __( 'Large', 'theme-name' ),
-	'shortName' => __( 'L', 'theme-name' ),
-	'size'      => 24,
-	'slug'      => 'large'
-),
+	array(
+		'name'      => __( 'Small', 'theme' ),
+		'shortName' => __( 'S', 'theme' ),
+		'size'      => 14,
+		'slug'      => 'small'
+	),
+
+	array(
+		'name'      => __( 'Medium', 'theme' ),
+		'shortName' => __( 'M', 'theme' ),
+		'size'      => 20,
+		'slug'      => 'medium'
+	),		
+	
+	array(
+		'name'      => __( 'Large', 'theme' ),
+		'shortName' => __( 'L', 'theme' ),
+		'size'      => 24,
+		'slug'      => 'large'
+	),
+	
+	array(
+		'name'      => __( 'Extra Large', 'theme' ),
+		'shortName' => __( 'XL', 'theme' ),
+		'size'      => 30,
+		'slug'      => 'xlarge'
+	),	
+	
 ) );
 
 // -- Disable Custom Colors
-add_theme_support( 'disable-custom-colors' );
+// add_theme_support( 'disable-custom-colors' );
 
 // -- Editor Color Palette
 add_theme_support( 'editor-color-palette', array(
-array(
-	'name'  => __( 'Primary', 'theme-name' ),
-	'slug'  => 'primary',
-	'color' => '#03a9f4',
-),
 
-array(
-	'name'  => __( 'White', 'theme-name' ),
-	'slug'  => 'white',
-	'color' => '#ffffff',
-),
+	array(
+		'name'  => __( 'White', 'theme' ),
+		'slug'  => 'white',
+		'color' => '#ffffff',
+	),
+	
+	array(
+		'name'  => __( 'Grey', 'theme' ),
+		'slug'  => 'grey',
+		'color' => '#ddd',
+	),
+
+	array(
+		'name'  => __( 'Black', 'theme' ),
+		'slug'  => 'black',
+		'color' => '#111',
+	),
+	
 ) );
 
 
 //add_theme_support( 'disable-custom-gradients' );
 
-function cwt_custom_gradients() {
+function hct_custom_gradients() {
 	add_theme_support(
 		'editor-gradient-presets',
 		array(
 		
 			array(
-				'name'     => __( 'Vertical grey-white', 'theme-name' ),
+				'name'     => __( 'Vertical grey-white', 'theme' ),
 				'gradient' => 'linear-gradient(0deg, rgba(255,255,255,1) 50%, rgba(222,222,222,1) 50%)',
 				'slug'     => 'vertical-grey-white'
 			)
@@ -66,7 +85,7 @@ function cwt_custom_gradients() {
 		)
 	);
 }
-add_action('after_setup_theme', 'cwt_custom_gradients');
+add_action('after_setup_theme', 'hct_custom_gradients');
 
 
 
