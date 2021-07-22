@@ -1026,6 +1026,7 @@ figcaption,
 .site-title a,
 .site-title a:focus,
 .site-title a:hover {
+	display: block;
 	width: 200px;
     height: 54px;
 	background: url(images/logo/logo.svg) no-repeat;
